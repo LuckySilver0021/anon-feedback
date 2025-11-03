@@ -24,9 +24,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
-  // If not logged in and trying to access dashboard, redirect to signin
-  if (!token && pathname.startsWith('/dashboard')) {
-    return NextResponse.redirect(new URL('/signin', request.url));
+  // If not logged in (unsigned user), redirect to the home page '/'
+  // This enforces: unsigned users visiting any non-exempt route will be sent to '/'
+  if (!token && pathname !== '/') {
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   return NextResponse.next();
