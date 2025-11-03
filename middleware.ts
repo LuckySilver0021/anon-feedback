@@ -1,31 +1,31 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
-export { default } from "next-auth/middleware";
+export { default } from 'next-auth/middleware';
+
 export async function middleware(request: NextRequest) {
-  const token = await getToken({ req: request});
+  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
   const url = request.nextUrl;
+  const pathname = url.pathname;
 
-  // If logged in and trying to visit auth pages or home, redirect to dashboard
-
-  if (url.pathname.startsWith('/api/auth')) {
+  // Allow API, Next internals, static files and favicon to pass through
+  if (
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/static') ||
+    pathname === '/favicon.ico' ||
+    pathname.includes('.') // likely a file (e.g. .png, .css)
+  ) {
     return NextResponse.next();
   }
-  
-  if (
-    token &&
-    (
-      url.pathname.startsWith('/signin') ||
-      url.pathname.startsWith('/signup') ||
-      url.pathname.startsWith('/verify') ||
-      url.pathname === '/'
-    )
-  ) {
+
+  // If logged in and visiting any non-dashboard page, redirect to /dashboard
+  if (token && !pathname.startsWith('/dashboard')) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
   // If not logged in and trying to access dashboard, redirect to signin
-  if (!token && url.pathname.startsWith('/dashboard')) {
+  if (!token && pathname.startsWith('/dashboard')) {
     return NextResponse.redirect(new URL('/signin', request.url));
   }
 
@@ -33,10 +33,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    '/signin',
-    '/signup',
-    '/verify/:path*',
-    '/dashboard/:path*'
-  ],
+  // Run the middleware for most application routes, but internal/static/API
+  // paths are excluded in the function above as a safeguard.
+  matcher: ['/((?!_next|api|static|favicon.ico).*)'],
 };

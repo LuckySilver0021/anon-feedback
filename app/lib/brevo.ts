@@ -1,6 +1,8 @@
 const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
 const brevoApiKey = process.env.BREVO_API_KEY || '';
-console.log('[Brevo] Using API Key:', brevoApiKey ? `${brevoApiKey.slice(0, 8)}...` : 'NOT SET');
+
+// Removed API key logging to prevent secret exposure
+console.log('[Brevo] API key status:', brevoApiKey ? 'SET' : 'NOT SET');
 
 export async function sendBrevoEmail(
   to: string,
