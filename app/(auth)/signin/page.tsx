@@ -55,9 +55,12 @@ const page = () => {
         className="w-full max-w-md rounded-2xl border border-neutral-700/80 bg-linear-to-b from-neutral-950 via-neutral-950/90 to-neutral-900/80 
         p-8 shadow-[0_0_30px_-10px_rgba(255,255,255,0.05)] backdrop-blur-sm transition-all duration-300 hover:border-neutral-600"
       >
-        <h1 className="mb-6 text-center text-3xl font-semibold tracking-tight text-white">
-          Sign In
-        </h1>
+        <div className="text-center space-y-2 mb-6">
+          <h1 className="text-3xl font-semibold tracking-tight text-white">
+            Welcome Back
+          </h1>
+          <p className="text-gray-400 text-sm">Sign in to your AMA profile and check your messages 💬</p>
+        </div>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">

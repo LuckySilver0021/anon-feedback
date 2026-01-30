@@ -17,8 +17,9 @@ export async function POST(request: Request) {
     try{
         const {username,code} = await request.json();
         const decodedUsername=decodeURIComponent(username);
+        console.log(`[Verify] Attempting to verify - Username: ${decodedUsername}, Code: ${code} (type: ${typeof code})`);
         const user=await UserModel.findOne({username:decodedUsername});
-        console.log(user);
+        console.log(`[Verify] User found:`, user?.username, `Stored Code: ${user?.verifyCode} (type: ${typeof user?.verifyCode})`);
         if(!user){
             return Response.json(
                 { 
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
         }
         else{
             const isValid=user.verifyCode === code && user.verifyCodeExpiry > new Date();
+            console.log(`[Verify] Code match: ${user.verifyCode === code}, Expiry valid: ${user.verifyCodeExpiry > new Date()}`);
             if(isValid){
                 user.isVerified = true;
                 await user.save();

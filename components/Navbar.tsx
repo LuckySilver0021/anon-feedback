@@ -16,7 +16,7 @@ const Navbar = () => {
         href="/"
         className="text-2xl font-bold tracking-tight text-white hover:text-neutral-300 transition"
       >
-        Mystery Message
+        Ask me Anything
       </Link>
 
       {/* Right side actions */}

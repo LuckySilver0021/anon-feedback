@@ -30,34 +30,50 @@ export default function SendMessage() {
       await axios.post('/api/sendMessage', { ...data, username });
       toast.success('Message sent successfully');
       form.reset({ content: '' });
-    } catch {
-      toast.error("User is currently not accepting messages.");
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.data?.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("User is currently not accepting messages.");
+      }
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    form.handleSubmit(onSubmit)(e).catch((error) => {
+      if (error instanceof z.ZodError) {
+        error.issues.forEach((err: z.ZodIssue) => {
+          toast.error(err.message);
+        });
+      }
+    });
   };
 
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center py-20 px-4">
       <div className="w-full max-w-xl bg-neutral-900/60 border border-neutral-800 rounded-2xl p-10 backdrop-blur-md shadow-lg space-y-8">
         {/* Heading */}
-        <h1 className="text-3xl md:text-4xl font-semibold text-center tracking-tight">
-          Send Anonymous Message
-        </h1>
+        <div className="text-center space-y-2">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Send a Message 💬</h1>
+          <p className="text-gray-400 text-sm md:text-base">Send message to  {username} anonymously.</p>
+        </div>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+          <form onSubmit={handleFormSubmit} className="space-y-5">
             <FormField
               control={form.control}
               name="content"
               render={({ field }) => (
                 <FormItem className="space-y-2">
                   <FormLabel className="text-gray-300 text-sm md:text-base">
-                    Message to {username}
+                    Your Message (min 10 characters)
                   </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Write your anonymous message..."
+                      placeholder="Don't hold back... what do you really think? 👀"
                       className="resize-none rounded-lg border border-neutral-700 bg-neutral-800/80 text-white text-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-indigo-600 min-h-20"
                       {...field}
                     />

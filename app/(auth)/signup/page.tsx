@@ -73,8 +73,12 @@ const Page = () => {
       const res = await axios.post("/api/signup", data);
       toast.success(res.data.message);
       router.replace(`/verify/${data.username}`);
-    } catch {
-      toast.error("Error in signing up, please try again.");
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.data?.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Error in signing up, please try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -85,8 +89,8 @@ const Page = () => {
       <div className="w-full max-w-md bg-neutral-900/60 border border-neutral-800 rounded-2xl p-8 backdrop-blur-md shadow-lg space-y-6">
         {/* Heading */}
         <div className="text-center space-y-1">
-          <h1 className="text-3xl font-semibold tracking-tight">Join Mystery Message</h1>
-          <p className="text-gray-400 text-sm">Signup to start your anonymous adventure</p>
+          <h1 className="text-3xl font-semibold tracking-tight">Ask me Anything</h1>
+          <p className="text-gray-400 text-sm">Share your link and get honest feedback from anyone. No judgment, just vibes ✨</p>
         </div>
 
         <Form {...form}>

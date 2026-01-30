@@ -116,17 +116,17 @@ const DashboardPage = () => {
       <div className="max-w-6xl mx-auto space-y-10">
         {/* Header */}
         <div className="space-y-2">
-          <h1 className="text-4xl font-semibold tracking-tight">Dashboard</h1>
+          <h1 className="text-4xl font-bold tracking-tight">Your AMA Profile 👤</h1>
           <p className="text-gray-400 text-sm">
-            Manage your messages and preferences
+            Share your link and watch the messages roll in
           </p>
         </div>
 
         {/* Profile Link */}
         <div className="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-6 backdrop-blur-md shadow-lg">
-          <h2 className="text-lg font-medium mb-2">Your Unique Link</h2>
+          <h2 className="text-lg font-medium mb-2">🔗 Your AMA Link</h2>
           <p className="text-sm text-gray-400 mb-4">
-            Share this link to receive anonymous messages.
+            Copy this and share it with your friends. They can send you anonymous vibes!
           </p>
           <div className="flex items-center gap-3">
             <input
@@ -171,9 +171,9 @@ const DashboardPage = () => {
         {/* Message Preferences */}
         <div className="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-6 flex items-center justify-between backdrop-blur-md">
           <div>
-            <h2 className="text-lg font-medium">Message Preferences</h2>
+            <h2 className="text-lg font-medium">💭 Accept Messages</h2>
             <p className="text-sm text-gray-400">
-              Toggle to accept or reject messages.
+              Turn this on to let people send you their honest thoughts.
             </p>
           </div>
           <Switch
@@ -203,7 +203,7 @@ const DashboardPage = () => {
 
         {/* Messages */}
         <div className="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-6">
-          <h2 className="text-lg font-medium mb-4">Messages</h2>
+          <h2 className="text-lg font-medium mb-4">💌 Your Messages</h2>
           {messages.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {messages.map((msg, idx) => (

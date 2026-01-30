@@ -37,7 +37,11 @@ const Page = () => {
       toast.success(res.data.message);
       router.replace("/signin");
     } catch (error) {
-      toast.error("Error verifying code. Please try again.");
+      if (axios.isAxiosError(error) && error.response?.data?.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Error verifying code. Please try again.");
+      }
       console.error(error);
     } finally {
       setIsSubmitting(false);
@@ -47,6 +51,11 @@ const Page = () => {
   return (
     <div className="min-h-screen bg-black flex items-center justify-center px-4">
       <div className="w-full max-w-sm bg-neutral-900/60 border border-neutral-800 backdrop-blur-md rounded-2xl p-8 shadow-lg flex flex-col justify-center space-y-6">
+        {/* Heading */}
+        <div className="text-center space-y-2">
+          <h1 className="text-3xl font-semibold tracking-tight text-white">Verify Your Account</h1>
+          <p className="text-gray-400 text-sm">Enter the code we sent to confirm you're really you ✨</p>
+        </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField

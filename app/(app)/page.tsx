@@ -8,6 +8,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from '@/components/ui/carousel';
 
 const messages: Message[] = messagesData;
@@ -25,17 +27,21 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center min-h-screen px-6 py-16 bg-black text-white">
         {/* Hero Section */}
         <section className="text-center mb-16 max-w-3xl">
-          <h1 className="text-3xl md:text-4xl font-medium tracking-tight leading-tight">
-            Anonymous Feedback. Real & Unfiltered.
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
+            Ask me Anything!
           </h1>
           <p className="mt-4 text-lg text-neutral-400">
-            Honest feedback, with no strings attached.
+            Get real, honest from anyone anynymously. No cap, no drama—just vibes. Share your link and see what people really think.
           </p>
         </section>
 
         {/* Carousel for Messages — updated styling */}
         <Carousel
-          plugins={[Autoplay({ delay: 2770 })]}
+          opts={{
+            align: "center",
+            loop: true,
+          }}
+          plugins={[Autoplay({ delay: 3000, stopOnInteraction: false })]}
           className="w-full max-w-xl"
         >
           <CarouselContent>
@@ -72,12 +78,14 @@ export default function Home() {
               </CarouselItem>
             ))}
           </CarouselContent>
+          <CarouselPrevious className="left-0 md:left-2" />
+          <CarouselNext className="right-0 md:right-2" />
         </Carousel>
       </main>
 
       {/* Footer */}
       <footer className="py-6 text-center bg-neutral-900 text-neutral-400 border-t border-neutral-700">
-        <p>© {new Date().getFullYear()} True Feedback. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Ask me Anything. Made for real conversations.</p>
       </footer>
     </>
   );

@@ -1,27 +1,37 @@
 [
   {
-    "title": "Message from TravelBuddy",
-    "content": "Hey! Are you free this weekend for a quick hiking trip?",
+    "title": "From your crush 👀",
+    "content": "Ngl you're actually so cute when you're not trying... but don't let it go to your head 😭",
     "received": "5 minutes ago"
   },
   {
-    "title": "Message from FoodieFan",
-    "content": "Just tried that new pizza place downtown — you HAVE to check it out!",
-    "received": "30 minutes ago"
+    "title": "From your bestie 💀",
+    "content": "bro you're so bad at cricket it's actually insane 😂😂 stop embarrassing us at the matches",
+    "received": "23 minutes ago"
   },
   {
-    "title": "Message from CodingGuru",
-    "content": "I found a neat trick to optimize your React app. Want me to send it?",
+    "title": "From a classmate ✨",
+    "content": "okay but why are you so good at presentations?? teach me your ways fr fr",
+    "received": "1 hour ago"
+  },
+  {
+    "title": "From admirer 😊",
+    "content": "the way you handle drama is insane... main character energy fr no cap",
     "received": "3 hours ago"
   },
   {
-    "title": "Message from BookLover",
-    "content": "I just finished reading that novel you recommended. It was amazing!",
-    "received": "7 hours ago"
+    "title": "From your homie 🔥",
+    "content": "your vibe is unmatched bestie... never change!! 💯",
+    "received": "5 hours ago"
   },
   {
-    "title": "Message from MovieBuff",
-    "content": "Are you going to the new Marvel release this weekend?",
+    "title": "Real talk 🎯",
+    "content": "you lowkey motivate everyone around you even if you don't realize it... keep shining 🌟",
+    "received": "8 hours ago"
+  },
+  {
+    "title": "From someone who gets it 👁️👄👁️",
+    "content": "the way you stay unbothered by what others think... that's literally the vibe we all need",
     "received": "1 day ago"
   }
 ]
